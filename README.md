@@ -53,7 +53,7 @@ pip install .
 ```
 
 ### Příklad použití
-Při použití z CLI na ukázkových souborech ze zadání:
+Použití z CLI na ukázkových souborech ze zadání:
 ```sh
 cpmetrics \
     original_files/preds.csv \
