@@ -6,7 +6,7 @@ __all__ = [
     "compute_metrics",
     "ClassificationResults",
     "load_csv",
-    "ClassificationPymetricsException"
+    "ClassificationPymetricsException",
 ]
 
 __version__ = "0.1.0"
