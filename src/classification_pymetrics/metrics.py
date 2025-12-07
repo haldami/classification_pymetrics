@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+import numpy as np
 from sklearn.metrics import (
     precision_score,
     recall_score,
@@ -14,7 +15,7 @@ class ClassificationResults:
     num_samples: int
     num_correct: int
     accuracy: float
-    confusion_matrix: list
+    confusion_matrix: np.ndarray
     precision_macro: float
     recall_macro: float
     f1_macro: float
@@ -24,9 +25,19 @@ class ClassificationResults:
 
     def __str__(self):
         """Nicely formatted string representation of the results ready to be printed."""
-        lines = ["\n=== Classification Metrics ==="]
-        for k, v in self.__dict__.items():
-            lines.append(f"{k:18}: {v}")
+        lines = ["=== Classification Metrics ==="]
+
+        for key, value in self.__dict__.items():
+            # floats - 6 decimal places
+            if isinstance(value, float):
+                val_str = f"{value:.6f}"
+            # numpy array - multiline block
+            elif isinstance(value, np.ndarray):
+                val_str = f"\n{value}"
+            # generic fallback
+            else:
+                val_str = str(value)
+            lines.append(f"{key:18}: {val_str}")
         return "\n".join(lines)
 
 
@@ -38,7 +49,7 @@ def compute_metrics(y_true, y_pred) -> ClassificationResults:
         num_samples=len(y_true),
         num_correct=int((y_true == y_pred).sum()),
         accuracy=float(accuracy_score(y_true, y_pred)),
-        confusion_matrix=list(confusion_matrix(y_true, y_pred)),
+        confusion_matrix=confusion_matrix(y_true, y_pred),
         precision_macro=float(
             precision_score(y_true, y_pred, average="macro", zero_division=0)
         ),
