@@ -1,8 +1,9 @@
-# Zadání:
+# classification_pymetrics
+## Zadání:
 > Představ si modelovou situaci, kde nám výzkumný stážista vytvořil tenhle kousek "kódu" a chtěli bychom, abys mu na něj udělal velmi stručné review kritických nedostatků a následně zrefaktoroval kód do instalovatelného python balíčku produkční kvality.
 
-# Hodnocení skriptu
-## Obecně k project managementu při vývoji software (i pokud by se nejednalo o Python balíček)
+## Hodnocení skriptu
+### Obecně k project managementu při vývoji software (i pokud by se nejednalo o Python balíček)
 - I menší projekty je dobré verzovat a jasně oddělit, co je zdroják, co vstup a co výstup.
   - Běžně se používá Git repozitory s `.gitignore` souborem.
   - Vstupy a výstupy nemají být verzované, pokud nejde o příklady použití.
@@ -16,7 +17,7 @@ conda activate rai_hw
 pip install -r requirements.txt
 ```
 
-## Poznámky ke struktuře skriptu a k jeho dokumentaci
+### Poznámky ke struktuře skriptu a k jeho dokumentaci
 - Pokud se počítá s tím, že skript bude použit z příkazové řádky, je vhodné zadávat vstupní a výstupní soubory jako argumenty a nemít je napevno zapsané ve skriptu. Pro použití skriptu jako balíčku jde o nutnost.
 - Bylo by mnohem vhodnější předávat funkcím hodnoty pomocí argumentů a výsledek získávat pomocí návratové hodnoty namísto globálních proměnných.
 - Je dobré si vybrat jeden styl komentářů a ten pak používat - např. sjednotit:
@@ -27,7 +28,7 @@ pip install -r requirements.txt
 - I kvůli použití globálních proměnných názvů vstupních souborů ve funkcích jsou v kódu dvě téměř identické funkce - `_load_preds` a `_load_labels`. Toto bych určitě změnil na jednu funkci se vstupním argumentem.
 - Pokud bychom chtěli získat alespoň základní znovupoužitelnost funkcí ve skriptu a někdy tyto funkce znovu nahrávat, je potřeba všechen kód, který by byl např. v Javě v metodě `main` dát do bloku s `if __name__ == "__main__":` - při importu funkcí ze skriptu by se jinak spustila i celá analýza dat.
 
-## Poznámky k funkčnosti skriptu
+### Poznámky k funkčnosti skriptu
 - Při prvním spuštění skriptu na příkladech program selhal za běhu (KeyError při načítání sloupce s preds_df, řádek 67 (byla reference na 67 meme záměrná? :D). Stejně by kód selhal i na následujícím řádku.).
   - Problémem je, že v příkladových CSV souborech je použit středník jako separátor namísto defaultní čárky (`,`).
   - Sice středník není přímo vhodný k použití, ale pokud bychom ho opravdu chtěli používat, pak by měl být středník uvedený jako volitelný argument skriptu.
@@ -41,11 +42,16 @@ pip install -r requirements.txt
 - Dalším zásadním problémem je špatná definice výpočtu accuracy. Dělitel je dvojnásobný oproti správnému výpočtu. Navíc, pokud ostatní metriky stejně používáme z sklearn, pak dává i accuracy použít z této knihovny - předejde se takto nešikovným chybám.
 - Nikde se nekontroluje, že data, která dostáváme k sobě patří (řádek k řádku). Toto se sice nechává na uživateli, nicméně i tak by bylo vhodné alespoň zkontrolovat, že počet výsledků z preds a labels je stejný.
 
-# Přepracovaný balíček
+## Přepracovaný balíček
+### Struktura kódu
 - Jednotlivé funkcionality jsou rozdělené do příslušných souborů. Zdrojový kód je ve složce `src`
   - `cli.py` - zajišťuje práci s balíčkem z příkazové řádky
   - `io.py` - načítání souborů
   - `metrics.py` - výpočty výstupních metrik. Také obsahuje dataclass třídu pro snazší/objektově orientovanou práci s výstupy.
   - `exceptions.py` - výjimka pro náš balíček
   - `__init__.py` - nezbytnost pro vytvoření balíčku
-  - 
+
+### Instalace
+
+### Příklad použití
+Při použití z CLI

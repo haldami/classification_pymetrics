@@ -35,6 +35,4 @@ def main():
         y_pred=preds_df[args.pred_col].values,
     )
 
-    print("\n=== Classification metrics ===")
-    for k, v in results.to_dict().items():
-        print(f"{k:18}: {v}")
+    print(results)

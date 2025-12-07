@@ -1,0 +1,14 @@
+[project]
+name = "classification_pymetrics"
+version = "0.1.0"
+description = "Simple metric computation for classification CSVs."
+authors = [{name="RAI"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "scikit-learn"
+]
+
+[project.scripts]
+cpmetrics = "classification_pymetrics.cli:main"
