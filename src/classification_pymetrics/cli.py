@@ -22,8 +22,8 @@ def main():
 
     args = parser.parse_args()
 
-    preds_df = load_csv(args.preds, [args.pred_col])
-    labels_df = load_csv(args.labels, [args.label_col])
+    preds_df = load_csv(args.preds, [args.pred_col], sep=args.sep)
+    labels_df = load_csv(args.labels, [args.label_col], sep=args.sep)
 
     if len(preds_df) != len(labels_df):
         raise ValueError(
