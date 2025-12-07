@@ -56,11 +56,13 @@ pip install .
 Při použití z CLI na ukázkových souborech ze zadání:
 ```sh
 cpmetrics \
-    --preds original_files/preds.csv \
-    --labels original_files/labels.csv \
-    --sep ";"
-    #--parallel-loading # Odkomentuj pro spuštění načítání souborů paralelně
+    original_files/preds.csv \
+    original_files/labels.csv \
+    --sep ";" \
+    --parallel-loading # Odkomentuj pro spuštění načítání souborů paralelně
 ```
+
+Pro další možnosti použij příkaz `cpmetrics --help`.
 
 ## Závěrečné poznámky
 Balíček umožňuje programatické použití - exportuje nezbytné třídy a metody.
@@ -69,4 +71,4 @@ CLI utilita (`cpmetrics`) umožňuje načítání souboru s predikcemi a labely 
 
 Výjimky jsou nastaveny tak, aby se případné další třídy výjimek p5i rozvoji balíčku mohly vytvářet z "base" výjimky `ClassificationPymetricsException`.
 
-Přidal jsem základní unit testy do složky `tests`. Spustí se např. příkazem `pytest -vv`.
+Přidal jsem základní unit testy do složky `tests`. Aby bylo možné testy spustit, je potřeba nainstalovat knihovnu `pytest`. Testy se spustí např. příkazem `pytest -vv`.
