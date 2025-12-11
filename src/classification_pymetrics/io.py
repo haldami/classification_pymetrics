@@ -4,7 +4,6 @@ import pandas as pd
 
 from .exceptions import CPIOException
 
-
 def load_csv(path: str, required_cols: list[str], sep=",") -> pd.DataFrame:
     """Load a CSV and validate required columns."""
     if not os.path.isfile(path):
