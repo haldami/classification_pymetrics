@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import numpy as np
+from numpy.typing import NDArray
 from sklearn.metrics import (
     precision_score,
     recall_score,
@@ -41,7 +42,7 @@ class ClassificationResults:
         return "\n".join(lines)
 
 
-def compute_metrics(y_true, y_pred) -> ClassificationResults:
+def compute_metrics(y_true: NDArray[np.int_], y_pred: NDArray[np.int_]) -> ClassificationResults:
     y_true = y_true.astype(int)
     y_pred = y_pred.astype(int)
 
